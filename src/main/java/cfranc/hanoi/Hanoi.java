@@ -5,22 +5,40 @@ public class Hanoi {
 	Tour tourInit;
 	Tour tourInter;
 	Tour tourDest;
+        private int nbDisque;
 
+        
+        // Jeu de hanoi avec n disques
 	public Hanoi(int n){
-		// TODO ...
+            // TODO ...
+            nbDisque = n;
+            tourInit = new Tour(n);
+            Disque tmp;
+            for (int i=0; i<nbDisque;i++){
+                tmp = new Disque(nbDisque-i);
+                tourInit.empiler(tmp);
+            }
+            tourInter = new Tour(n);
+            tourDest = new Tour (n);
 	}
 
-	
+	// Jeu de hanoi avec 3 disques
 	public Hanoi(){
-		tourInit = new Tour();
-		tourInter = new Tour();
-		tourDest = new Tour();
-		Disque petit = new Disque(1);
-		Disque moyen = new Disque(2);
-		Disque grand = new Disque(3);
-		tourInit.empiler(grand);
-		tourInit.empiler(moyen);
-		tourInit.empiler(petit);
+            nbDisque = 3;
+            tourInit = new Tour();
+            Disque tmp;
+            for( int i=0;i<nbDisque;i++){
+                tmp = new Disque(nbDisque-i);
+                tourInit.empiler(tmp);
+            }
+            tourInter = new Tour();
+            tourDest = new Tour();
+            Disque petit = new Disque(1);
+            Disque moyen = new Disque(2);
+            Disque grand = new Disque(3);
+            tourInit.empiler(grand);
+            tourInit.empiler(moyen);
+            tourInit.empiler(petit);
 	}
 	
 	public void bougerSommet(Tour from, Tour to) {
@@ -28,6 +46,7 @@ public class Hanoi {
 		tourInter = new Tour();
 		tourDest = new Tour();
 		// TODO ...
+                to.empiler(from.depiler());
 	}
 
 	public void deplacer(int nbDisque, Tour from, Tour to, Tour by){
@@ -49,7 +68,8 @@ public class Hanoi {
 		System.out.println(game.tourDest.estVide());
 		game.jouer();
 		System.out.println(game.tourInit.estVide());
-		System.out.println(game.tourDest.estVide());
+                System.out.println(game.tourDest.estPleine());
+                game.jouer();
 		
 		// Compléter la classe Hanoi pour résoudre le jeux avec n disques :
 		int n =100;
